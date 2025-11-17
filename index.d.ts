@@ -21,6 +21,40 @@ interface CoffeeOptions {
 }
 
 /**
+ * Describes the compilation results passed to a plugin's executor function.
+ */
+interface CompilationResult {
+  /**
+   * The complete configuration object loaded from `coffee.config.cjs`.
+   * (Typed as `any` to prevent circular type definitions, but it conforms to the `Config` interface).
+   */
+  config: any;
+
+  /**
+   * An array of absolute paths to the compiled .js and .js.map files.
+   */
+  compiledFiles: string[];
+
+  /**
+   * The stdout from the coffee compiler.
+   * (Note: In watch mode, this will be a placeholder string like '(watch mode)').
+   */
+  stdout: string;
+
+  /**
+   * The stderr from the coffee compiler.
+   */
+  stderr: string;
+}
+
+/**
+ * Defines the function returned by a plugin's setup function.
+ * This function is executed by Milkee after a successful compilation.
+ * It can be synchronous or asynchronous (return a Promise).
+ */
+type PluginExecutor = (result: CompilationResult) => void | Promise<void>;
+
+/**
  * (Optional) Additional options/plugins for the Milkee builder.
  */
 interface MilkeeConfig {
@@ -34,7 +68,28 @@ interface MilkeeConfig {
      */
     confirm?: boolean;
   };
-  plugins?: any[];
+  /**
+   * (Optional) An array of plugin executor functions.
+   *
+   * A plugin executor is the function *returned* by your plugin's setup function
+   * (which is what you `require` in your config).
+   *
+   * @example
+   * // coffee.config.cjs
+   * const myPlugin = require('./plugins/my-plugin.js');
+   *
+   * module.exports = {
+   *   // ...
+   *   milkee: {
+   *     plugins: [
+   *       // This call returns the PluginExecutor
+   *       myPlugin({ option: 'value' }),
+   *       // ...
+   *     ]
+   *   }
+   * }
+   */
+  plugins?: PluginExecutor[];
 }
 
 /**
