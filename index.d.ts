@@ -67,6 +67,7 @@ interface MilkeeConfig {
      * Before compiling, confirm "Do you want to Continue?"
      */
     confirm?: boolean;
+    copy?: boolean;
   };
   /**
    * (Optional) An array of plugin executor functions.
