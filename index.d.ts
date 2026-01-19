@@ -60,6 +60,10 @@ type PluginExecutor = (result: CompilationResult) => void | Promise<void>;
 interface MilkeeConfig {
   options?: {
     /**
+     * Ignore update notifications.
+     */
+    ignoreUpdate?: boolean,
+    /**
      * Before compiling, reset the directory.
      */
     refresh?: boolean;
