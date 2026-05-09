@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/otoneko1102/coffeescript-milkee-d.git"
+    "url": "git+https://github.com/otnc/coffeescript-milkee-d.git"
   },
   "keywords": [
     "coffeescript",
@@ -21,7 +21,7 @@
   "author": "otoneko.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/otoneko1102/coffeescript-milkee-d/issues"
+    "url": "https://github.com/otnc/coffeescript-milkee-d/issues"
   },
-  "homepage": "https://github.com/otoneko1102/coffeescript-milkee-d#readme"
+  "homepage": "https://github.com/otnc/coffeescript-milkee-d#readme"
 }
